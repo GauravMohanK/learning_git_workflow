@@ -1,6 +1,6 @@
 import numpy as np
 
-class LogisticRegressionScratch:
+class LogisticRegression:
 
     def __init__(self, lr=0.01, epochs=1000):
         self.lr = lr
@@ -40,6 +40,6 @@ class LogisticRegressionScratch:
         z = np.dot(X, self.W) + self.b
         return self.sigmoid(z)
 
-    def predict(self, X):
+    def prediction(self, X):
         probs = self.predict_proba(X)
         return (probs >= 0.5).astype(int)
