@@ -28,6 +28,25 @@ class KNN:
         prediction = Counter(k_labels).most_common(1)[0][0]
 
         return prediction
+    
+    def _predict_proba(self, X):
+        distance = np.linalg.norm(self.X_train - x, axis=1)
+
+        k_indices = np.argpartition(distance, self.k)[:self.k]
+        k_labels = self.y_train[k_indices]
+
+        probabilities = []
+
+        for cls in self.classes_:
+            prob = np.sum(k_labels == cls) / self.k
+            probabilities.append(prob)
+
+        return np.array(probabilities)
+     
 
     def predict(self, X):
         return np.array([self._predict(x) for x in X])
+    
+    
+    def predict_proba(self, X):
+        return np.array([self._predict_proba(x) for x in X])
